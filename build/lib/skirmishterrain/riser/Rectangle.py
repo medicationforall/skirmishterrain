@@ -12,4 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 75 x 75 x 150 mm
+# 150 x 75 x 75 mm
+
+import cadquery as cq
+
+class Rectangle:
+    def __init__(self):
+        self.rectangle = None
+
+    def make(self):
+        self.rectangle = cq.Workplane("XY").box(150, 75, 75)
+
+    def build(self):
+        return self.rectangle
