@@ -10,3 +10,5 @@ src/skirmishterrain.egg-info/requires.txt
 src/skirmishterrain.egg-info/top_level.txt
 src/skirmishterrain/riser/Cube.py
 src/skirmishterrain/riser/Rectangle.py
+src/skirmishterrain/stair/StairFull.py
+src/skirmishterrain/stair/StairHalf.py

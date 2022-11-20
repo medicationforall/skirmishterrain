@@ -13,3 +13,17 @@
 # limitations under the License.
 
 # 75 x 75x 75 mm
+
+import cadquery as cq
+from cqterrain import roof
+
+
+class StairFull:
+    def __init__(self):
+        self.stair = None
+
+    def make(self):
+        self.stair = roof.dollhouse_gable(75, 75, 75)
+
+    def build(self):
+        return self.stair
