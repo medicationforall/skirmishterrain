@@ -18,10 +18,11 @@ import cadquery as cq
 
 class Rectangle:
     def __init__(self):
+        self.width = 150
         self.rectangle = None
 
     def make(self):
-        self.rectangle = cq.Workplane("XY").box(150, 75, 75)
+        self.rectangle = cq.Workplane("XY").box(self.width, 75, 75)
 
     def build(self):
         return self.rectangle
