@@ -14,14 +14,19 @@
 
 # 75 x 75 x 75 mm
 
+from .. import Base
 import cadquery as cq
 
-class Cube:
+
+class Cube(Base):
     def __init__(self):
+        super().__init__()
         self.cube = None
 
     def make(self):
-        self.cube = cq.Workplane("XY").box(75, 75, 75)
+        super().make()
+        self.cube = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.cube

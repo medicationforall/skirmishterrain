@@ -14,16 +14,20 @@
 
 # 75 x 75x 75 mm
 
+from .. import Base
 import cadquery as cq
 from cqterrain import roof
 
 
-class StairFull:
+class StairFull(Base):
     def __init__(self):
+        super().__init__()
         self.stair = None
 
     def make(self):
-        self.stair = roof.dollhouse_gable(75, 75, 75)
+        super().make()
+        self.stair = roof.dollhouse_gable(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.stair

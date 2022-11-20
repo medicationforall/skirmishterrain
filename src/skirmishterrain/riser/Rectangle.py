@@ -14,15 +14,20 @@
 
 # 150 x 75 x 75 mm
 
+from .. import Base
 import cadquery as cq
 
-class Rectangle:
+
+class Rectangle(Base):
     def __init__(self):
-        self.width = 150
+        super().__init__()
+        self.length = 150
         self.rectangle = None
 
     def make(self):
-        self.rectangle = cq.Workplane("XY").box(self.width, 75, 75)
+        super().make()
+        self.rectangle = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.rectangle
