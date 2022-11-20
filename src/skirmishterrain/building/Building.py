@@ -13,15 +13,20 @@
 # limitations under the License.
 
 # 150 x 75 x 150 mm
-
+from .. import Base
 import cadquery as cq
 
-class Building:
+class Building(Base):
     def __init__(self):
+        super().__init__()
+        self.length=150
+        self.height=150
         self.building = None
 
     def make(self):
-        self.building = cq.Workplane("XY").box(150, 75, 150)
+        super().make()
+        self.building = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.building

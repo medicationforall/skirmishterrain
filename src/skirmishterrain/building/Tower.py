@@ -14,14 +14,19 @@
 
 # 75 x 75 x 150 mm
 
+from .. import Base
 import cadquery as cq
 
 class Tower:
     def __init__(self):
+        super().__init__()
+        self.height=150
         self.tower = None
 
     def make(self):
-        self.tower = cq.Workplane("XY").box(75, 75, 150)
+        super().make()
+        self.tower = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.tower

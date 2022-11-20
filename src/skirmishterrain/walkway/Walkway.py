@@ -13,14 +13,22 @@
 # limitations under the License.
 
 # 75 (4+4?) x 37.5  x 4 mm
+
+from .. import Base
 import cadquery as cq
 
-class Walkway:
+class Walkway(Base):
     def __init__(self):
+        super().__init__()
+        self.length = 75+8
+        self.width = 37.5
+        self.height = 4
         self.walkway = None
 
     def make(self):
-        self.walkway = cq.Workplane("XY").box(75+8, 37.5, 4)
+        super().make()
+        self.walkway = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.walkway

@@ -13,14 +13,22 @@
 # limitations under the License.
 
 # 150 (4+4?) x 75 x  4 mm
+
+from .. import Base
 import cadquery as cq
 
-class Bridge:
+class Bridge(Base):
     def __init__(self):
+        super().__init__()
+        self.length = 150+8
+        self.width = 75
+        self.height = 4
         self.bridge = None
 
     def make(self):
-        self.bridge = cq.Workplane("XY").box(150+8, 75, 4)
+        super().make()
+        self.bridge = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.bridge

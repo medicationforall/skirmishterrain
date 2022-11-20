@@ -14,14 +14,20 @@
 
 # 75 x 37.5 x 37.5 mm
 
+from .. import Base
 import cadquery as cq
 
 class HalfWall:
     def __init__(self):
+        super().__init__()
+        self.width = 37.5
+        self.height = 37.5
         self.half_wall = None
 
     def make(self):
-        self.half_wall = cq.Workplane("XY").box(75, 37.5, 37.5)
+        super().make()
+        self.half_wall = cq.Workplane("XY").box(self.length, self.width, self.height)
 
     def build(self):
+        super().build()
         return self.half_wall
