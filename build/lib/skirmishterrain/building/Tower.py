@@ -13,3 +13,15 @@
 # limitations under the License.
 
 # 75 x 75 x 150 mm
+
+import cadquery as cq
+
+class Tower:
+    def __init__(self):
+        self.tower = None
+
+    def make(self):
+        self.tower = cq.Workplane("XY").box(75, 75, 150)
+
+    def build(self):
+        return self.tower

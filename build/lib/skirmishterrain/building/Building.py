@@ -12,18 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 37.5 x 75 x  75 mm
+# 150 x 75 x 150 mm
 
 import cadquery as cq
-from cqterrain import roof
 
-
-class StairHalf:
+class Building:
     def __init__(self):
-        self.stair = None
+        self.building = None
 
     def make(self):
-        self.stair = roof.dollhouse_gable(37.5, 75, 75)
+        self.building = cq.Workplane("XY").box(150, 75, 150)
 
     def build(self):
-        return self.stair
+        return self.building
