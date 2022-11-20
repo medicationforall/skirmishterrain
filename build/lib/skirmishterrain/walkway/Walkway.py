@@ -12,4 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 150 (4+4?) x 75 x  4 mm
+# 75 (4+4?) x 37.5  x 4 mm
+import cadquery as cq
+
+class Walkway:
+    def __init__(self):
+        self.walkway = None
+
+    def make(self):
+        self.walkway = cq.Workplane("XY").box(75+8, 37.5, 4)
+
+    def build(self):
+        return self.walkway

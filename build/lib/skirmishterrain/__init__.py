@@ -6,3 +6,7 @@ from .stair.StairHalf import StairHalf
 
 from .building.Building import Building
 from .building.Tower import Tower
+
+
+from .walkway.Walkway import Walkway
+from .walkway.Bridge import Bridge
