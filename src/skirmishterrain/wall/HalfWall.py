@@ -12,4 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
- 75 x  75 x 37.5 mm
+# 75 x 37.5 x 37.5 mm
+
+import cadquery as cq
+
+class HalfWall:
+    def __init__(self):
+        self.half_wall = None
+
+    def make(self):
+        self.half_wall = cq.Workplane("XY").box(75, 37.5, 37.5)
+
+    def build(self):
+        return self.half_wall

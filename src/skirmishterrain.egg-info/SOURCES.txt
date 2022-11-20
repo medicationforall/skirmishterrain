@@ -15,3 +15,5 @@ src/skirmishterrain/stair/StairFull.py
 src/skirmishterrain/stair/StairHalf.py
 src/skirmishterrain/walkway/Bridge.py
 src/skirmishterrain/walkway/Walkway.py
+src/skirmishterrain/wall/CornerWall.py
+src/skirmishterrain/wall/HalfWall.py

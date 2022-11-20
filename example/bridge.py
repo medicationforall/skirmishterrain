@@ -6,4 +6,4 @@ bp.make()
 result = bp.build()
 
 #show_object(result)
-cq.exporters.export(result,'stl/Bridgebridge.stl')
+cq.exporters.export(result,'stl/bridge.stl')
