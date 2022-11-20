@@ -13,16 +13,17 @@ from skirmishterrain import (
     Board
 )
 
-bp_cube = Cube()
-bp_cube.make()
-result_cube = bp_cube.build()
+bp_terrain = Cube()
+bp_terrain.make()
+result_terrain = bp_terrain.build()
 
 bp = Board()
-bp.add_terrain(result_cube, (2,2), (75,75,75))
+bp.rows = 10
+bp.columns = 7
+bp.add_terrain(result_terrain, (0,0), (75,75,75))
+
 bp.make()
 result = bp.build()
 
-
-#show_object(result_cube)
-show_object(result)
+# show_object(result)
 cq.exporters.export(result,'stl/Board.stl')
