@@ -12,3 +12,5 @@ from .walkway.Bridge import Bridge
 
 from .wall.CornerWall import CornerWall
 from .wall.HalfWall import HalfWall
+
+from .board.Board import Board

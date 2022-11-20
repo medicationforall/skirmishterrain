@@ -5,8 +5,8 @@ src/skirmishterrain/__init__.py
 src/skirmishterrain.egg-info/PKG-INFO
 src/skirmishterrain.egg-info/SOURCES.txt
 src/skirmishterrain.egg-info/dependency_links.txt
-src/skirmishterrain.egg-info/requires.txt
 src/skirmishterrain.egg-info/top_level.txt
+src/skirmishterrain/board/Board.py
 src/skirmishterrain/building/Building.py
 src/skirmishterrain/building/Tower.py
 src/skirmishterrain/riser/Cube.py
