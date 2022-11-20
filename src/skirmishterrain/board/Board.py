@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 75 x 75 x 75 mm
-
 import cadquery as cq
 from cadqueryhelper import grid
 
@@ -31,22 +29,19 @@ class Board:
         self.board = grid.make_grid(self.tile, dim = [76,76], rows = self.rows, columns = self.columns)
         self.board_dim = (76*self.rows, 76*self.columns)
 
+    def build(self):
+        scene = cq.Workplane("XY")
+        scene.add(self.board)
+        scene = self.place_terrain(scene)
+        return scene
+
     def add_terrain(self, part, loc, dim):
-        #print("add to", loc, dim)
         place_def = {
         "part":part,
         "location":loc,
         "dimensions":dim
         }
         self.terrain.append(place_def)
-
-
-    def build(self):
-        scene = cq.Workplane("XY")
-        scene.add(self.board)
-        scene = self.place_terrain(scene)
-
-        return scene
 
     def place_terrain(self, scene):
         for piece in self.terrain:
