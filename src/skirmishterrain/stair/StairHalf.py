@@ -19,7 +19,7 @@ import cadquery as cq
 from cqterrain import roof
 
 
-class StairHalf:
+class StairHalf(Base):
     def __init__(self):
         super().__init__()
         self.length = 37.5

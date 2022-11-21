@@ -26,12 +26,23 @@ bp_terrain_3 = StairFull()
 bp_terrain_3.make()
 result_terrain_3 = bp_terrain_3.build()
 
+bp_terrain_4 = Building()
+bp_terrain_4.length=225
+bp_terrain_4.make()
+result_terrain_4 = bp_terrain_4.build()
+
+bp_terrain_5 = StairHalf()
+bp_terrain_5.make()
+result_terrain_5 = bp_terrain_5.build()
+
 bp = Board()
 bp.rows = 10
 bp.columns = 7
 bp.add_terrain(result_terrain, (0,0), bp_terrain.dimensions(), (0,0))
 bp.add_terrain(result_terrain_2, (3,1), bp_terrain_2.dimensions(), (1,0))
 bp.add_terrain(result_terrain_3, (3,2), bp_terrain_3.dimensions(), (0,0), 180)
+bp.add_terrain(result_terrain_4, (3,6), bp_terrain_4.dimensions(), (0,0))
+bp.add_terrain(result_terrain_5, (5,2), bp_terrain_5.dimensions(), (0,0), 180)
 
 bp.make()
 result = bp.build()

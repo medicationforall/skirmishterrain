@@ -17,7 +17,7 @@
 from .. import Base
 import cadquery as cq
 
-class HalfWall:
+class HalfWall(Base):
     def __init__(self):
         super().__init__()
         self.width = 37.5
