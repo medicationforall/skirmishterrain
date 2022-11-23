@@ -17,8 +17,8 @@
 from .. import Base
 import cadquery as cq
 import math
-from cqterrain import Ladder, Door
-from cadqueryhelper import grid
+from cqterrain import Ladder, Door, window
+from cadqueryhelper import grid, series, shape
 
 
 def greeble(dim):
@@ -71,29 +71,13 @@ def sci_fi_panels(cube, dim):
     y_plus_panel = greeble(dim).translate((0,(dim[1]/2)-3,0))
     y_minus_panel = greeble(dim).translate((0,-1*((dim[1]/2)-3),0))
 
-    ladder_bp = Ladder()
-    ladder_bp.height=dim[2]-8
-    ladder_bp.width=3.5
-    ladder_bp.rung_padding=9
-    ladder_bp.make_rung = make_rung
-    #ladder_bp.make_side_rail = make_side_rail
-    ladder_bp.make()
-    x_plus_ladder = ladder_bp.build().rotate((0,0,1),(0,0,0),-90).translate(((dim[0]/2)-2,0,0))
-
-    door_bp = Door()
-    door_bp.width=6
-    door_bp.length=35
-    door_bp.height=50
-    door_bp.frame_length=6
-    door_bp.inner_width=5
-    door_bp.make()
-    x_min_door = door_bp.build().rotate((0,0,1),(0,0,0),90).translate((-1*((dim[0]/2)-3),0,-1*((dim[2]/2)-25)))
-    #return x_ladder
+    x_plus_ladder = __sci_fi_ladder(dim)
+    x_min_door = __sci_fi_door(dim)
 
 
     cube = cube.faces("Z").edges().chamfer(2)
     floor_tiles = tile_floor(dim)
-    return (
+    cut_cube = (
         cube.cut(y_cut)
         .cut(x_cut)
         .cut(z_cut)
@@ -103,6 +87,67 @@ def sci_fi_panels(cube, dim):
         .add(x_min_door)
         .add(floor_tiles)
         )
+
+    cut_cube = __sci_fi_windows(dim, cut_cube)
+    return cut_cube
+
+def __sci_fi_ladder(dim):
+    ladder_bp = Ladder()
+    ladder_bp.height=dim[2]-8
+    ladder_bp.width=3.5
+    ladder_bp.rung_padding=9
+    ladder_bp.make_rung = make_rung
+    #ladder_bp.make_side_rail = make_side_rail
+    ladder_bp.make()
+    x_plus_ladder = ladder_bp.build().rotate((0,0,1),(0,0,0),-90).translate(((dim[0]/2)-2,0,0))
+    return x_plus_ladder
+
+def __sci_fi_door(dim):
+    door_bp = Door()
+    door_bp.width=6
+    door_bp.length=35
+    door_bp.height=50
+    door_bp.frame_length=6
+    door_bp.inner_width=5
+    door_bp.make()
+    x_min_door = door_bp.build().rotate((0,0,1),(0,0,0),90).translate((-1*((dim[0]/2)-3),0,-1*((dim[2]/2)-25)))
+    return x_min_door
+
+def __rail_operation(tile, size, index, bounding_box):
+    rail_rotation = 0
+    if index % 2 == 1:
+        rail_rotation = 180
+    win_rail = (
+        shape.rail(length=12-3, width=5-2, height=16-3)
+        .rotate((0,0,1),(0,0,0),90)
+        .rotate((0,0,1),(0,0,0),rail_rotation)
+    )
+
+    new_tile = cq.Workplane("XY").add(tile).add(win_rail)
+    return new_tile
+
+def __sci_fi_windows(dim, cube):
+    win_lengh = 12
+    win_width_offset = 3
+    series_size = math.floor((dim[1]-8-8) / (win_lengh+win_width_offset))
+    win_cut = (
+        cq.Workplane("XY").box(12, 4, 16)
+        .rotate((0,0,1),(0,0,0),90)
+    )
+
+    cut_series = (
+        series(win_cut, series_size, width_offset=win_width_offset)
+        .translate((-1*(dim[0]/2)+3,0,(dim[2]/2)-8-4-2))
+    )
+
+    frame = window.frame(length=12, width = 5, height = 16, frame_width=1.5).rotate((0,0,1),(0,0,0),90)
+    frame_series = (
+        series(frame, series_size, width_offset=win_width_offset, operation=__rail_operation)
+        .translate((-1*(dim[0]/2)+3,0,(dim[2]/2)-8-4-2))
+    )
+
+    cube = cube.cut(cut_series).add(frame_series)
+    return cube
 
 
 class Cube(Base):
