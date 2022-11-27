@@ -11,7 +11,7 @@ python Library for making skirmish wargame terrain
 ### Installation
 To install skirmishterrain directly from GitHub, run the following `pip` command:
 
-	pip install git+https://github.com/medicationforall/cqterrain
+	pip install git+https://github.com/medicationforall/skirmishterrain
 
 **OR**
 
