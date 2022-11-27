@@ -35,6 +35,13 @@ bp_terrain_5 = StairHalf()
 bp_terrain_5.make()
 result_terrain_5 = bp_terrain_5.build()
 
+bp_terrain_6 = Cube()
+bp_terrain_6.width=150
+bp_terrain_6.make()
+result_terrain_6 = bp_terrain_6.build()
+
+
+
 bp = Board()
 bp.rows = 10
 bp.columns = 7
@@ -43,6 +50,7 @@ bp.add_terrain(result_terrain_2, (3,1), bp_terrain_2.dimensions(), (1,0))
 bp.add_terrain(result_terrain_3, (3,2), bp_terrain_3.dimensions(), (0,0), 180)
 bp.add_terrain(result_terrain_4, (3,6), bp_terrain_4.dimensions(), (0,0))
 bp.add_terrain(result_terrain_5, (5,2), bp_terrain_5.dimensions(), (0,0), 180)
+bp.add_terrain(result_terrain_6, (7,3), bp_terrain_6.dimensions(), (0,0))
 
 bp.make()
 result = bp.build()
