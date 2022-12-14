@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: skirmishterrain
-Version: 0.0.1
+Version: 0.0.2
 Summary: Python Library for building skirmish wargame terrain
 Author-email: James Adams <inklink28@gmail.com>
 License:                                  Apache License
@@ -227,7 +227,7 @@ python Library for making skirmish wargame terrain
 ### Installation
 To install skirmishterrain directly from GitHub, run the following `pip` command:
 
-	pip install git+https://github.com/medicationforall/cqterrain
+	pip install git+https://github.com/medicationforall/skirmishterrain
 
 **OR**
 
