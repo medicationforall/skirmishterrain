@@ -17,7 +17,7 @@
 from .. import Base
 import cadquery as cq
 import math
-from cqterrain import Ladder, Door, window
+from cqterrain import Ladder, Door, window, tile
 from cadqueryhelper import grid, series, shape
 
 
@@ -45,17 +45,19 @@ def make_side_rail(width, height, rail_width):
     return rail
 
 def tile_floor(dim):
-    tile = cq.Workplane("XY").box(21, 21, 2)
-    slot = cq.Workplane("XY").slot2D(21,2).extrude(2).rotate((0,0,1),(0,0,0),45)
-    slot2 = cq.Workplane("XY").slot2D(21-7,2).extrude(2).rotate((0,0,1),(0,0,0),45).translate((-3,-3,0))
-    slot3 = cq.Workplane("XY").slot2D(21-7,2).extrude(2).rotate((0,0,1),(0,0,0),45).translate((3,3,0))
-    slot4 = cq.Workplane("XY").slot2D(21-7-7,2).extrude(2).rotate((0,0,1),(0,0,0),45).translate((-3-3,-3-3,0))
-    slot5 = cq.Workplane("XY").slot2D(21-7-7,2).extrude(2).rotate((0,0,1),(0,0,0),45).translate((3+3,3+3,0))
+    diagonal_tile = tile.slot_diagonal(
+        tile_size = 21,
+        height = 2,
+        slot_width = 2,
+        slot_height = 2,
+        slot_length_padding = 7,
+        slot_width_padding = 2,
+        slot_width_padding_modifier = .25
+    )
 
-    tile = tile.cut(slot).cut(slot2).cut(slot3).cut(slot4).cut(slot5)
     rows = math.floor(dim[0]/22.5)
     columns = math.floor(dim[1]/22.5)
-    tiles = grid.make_grid(tile, [22.5,22.5], rows=rows, columns= columns).translate((0,0,(dim[2]/2)-1))
+    tiles = grid.make_grid(diagonal_tile, [22.5,22.5], rows=rows, columns= columns).translate((0,0,(dim[2]/2)-1))
 
     return tiles
 
@@ -118,7 +120,7 @@ def __rail_operation(tile, size, index, bounding_box):
     if index % 2 == 1:
         rail_rotation = 180
     win_rail = (
-        shape.rail(length=12-3, width=5-2, height=16-3)
+        shape.rail(length=12-3, width=5-2, height=16-3, inner_height=2.5)
         .rotate((0,0,1),(0,0,0),90)
         .rotate((0,0,1),(0,0,0),rail_rotation)
     )
